@@ -270,13 +270,14 @@ header {
       width: 80%;
       @media only screen and (max-width: 728px) {
         width: 100%;
+        height: auto;
         padding-top: 20px;
-        display: flex;
-        justify-content: center;
+        text-align: center;
       }
       img {
         width: 100%;
         @media only screen and (max-width: 728px) {
+          height: auto;
           width: 90%;
         }
       }
