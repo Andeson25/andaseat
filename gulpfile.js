@@ -37,28 +37,27 @@ gulp.task('browser-sync', () => {
 });
 
 gulp.task('css-libs', ['sass'], () => {
-        return gulp.src([
+    return gulp.src([
             'app/libs/**/dist/**/*.+(slim||min).css',
             // 'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
         ])
-            .pipe(cssnano())
-            .pipe(rename({
-                dirname: "",
-                basename: "libs",
-                suffix: ".min",
-                extname: ".css"
-            }))
-            .pipe(concat('libs.min.css'))
-            .pipe(gulp.dest('app/css'))
-    }
-);
+        .pipe(cssnano())
+        .pipe(rename({
+            dirname: "",
+            basename: "libs",
+            suffix: ".min",
+            extname: ".css"
+        }))
+        .pipe(concat('libs.min.css'))
+        .pipe(gulp.dest('app/css'))
+});
 
 
 gulp.task('scripts', () => {
     return gulp.src([
-        'app/libs/**/dist/**/*.+(slim||min).js',
-        // 'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
-    ])
+            'app/libs/**/dist/**/*.+(slim||min).js',
+            // 'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
+        ])
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/js'))
@@ -77,18 +76,15 @@ gulp.task('img', () => {
         .pipe(cache(imagemin({
             interlaced: true,
             progressive: true,
-            svgoPlugins: [
-                {
-                    removeViewBox: false
-                }
-            ],
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
             use: [pngQuant()]
         })))
         .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('watch', ['browser-sync', 'scripts', 'css-libs'], () =>
-{
+gulp.task('watch', ['browser-sync', 'scripts', 'css-libs'], () => {
     gulp.watch('app/sass/**/*.scss', ['sass']);
     gulp.watch('app/libs/**/*', ['scripts']);
     gulp.watch(['app/**/*.html'], browserSync.reload);
